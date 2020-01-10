@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $this->user = $user;
     }
-   
+
     public function index()
     {
         $users = $this->user->where([])->paginate(request()->get('limit', 10));
@@ -25,18 +25,23 @@ class UserController extends Controller
         return RestApi::setPagination($users)->successWithData(UserResource::collection($users));
     }
 
+    public function dashboard(Request $request){
+        return RestApi::successWithData($request->user());
+    }
+
 
     public function create(Request $request)
     {
     }
 
-   
+
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email',
-           
+
         ]);
         $data['password'] = '12345';
 
@@ -45,13 +50,13 @@ class UserController extends Controller
         return RestApi::success("User created successfully..");
     }
 
-  
+
     public function show($id)
     {
         //
     }
 
-   
+
     public function edit($id)
     {
         $user = $this->user->getById($id);
@@ -65,7 +70,7 @@ class UserController extends Controller
         //
     }
 
-   
+
     public function destroy($id)
     {
         $delete = $this->user->delete($id);

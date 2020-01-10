@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/logs/*
 /vendor
 .env
 .env.backup
@@ -17,4 +18,8 @@ yarn-error.log
 .laravel6.sublime-project
 .laravel6.sublime-workspace
 README.md
+_ide_helper.php
+.phpstorm.meta.php
+.idea/*
+
 

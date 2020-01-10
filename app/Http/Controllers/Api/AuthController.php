@@ -7,13 +7,8 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\User\UserRepository;
-use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Classes\RestApi;
-
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -24,7 +19,6 @@ class AuthController extends Controller
     public function __construct(UserRepository $user)
     {
         $this->user = $user;
-
     }
 
     public function login(UserLoginRequest $request)
@@ -49,9 +43,9 @@ class AuthController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password'))
+            'password' => \Hash::make($request->get('password'))
         ]);
-
+        
         return RestApi::successWithData(new UserResource($user), "User Register successfully.");
     }
 

@@ -15,6 +15,4 @@ interface BaseInterface {
     public function paginate($perPage = 10);
 
     public function where($condition = []);
-
-    
 }

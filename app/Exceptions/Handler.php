@@ -58,11 +58,11 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function render($request, Exception $exception)
     {
-       // dd($exception);
+       //dd($exception);
         if ($request->is('api/*')) {
             try {
                 if ($exception instanceof AuthenticationException) {
@@ -77,26 +77,30 @@ class Handler extends ExceptionHandler
                     return RestApi::error(implode("<br>", Arr::flatten($exception->validator->messages()->getMessages())), 'validation_error');
                 }
 
-                if ($exception instanceof MethodNotAllowedHttpException) {
-                    return RestApi::error($exception->getMessage());
-                }
+
+                return RestApi::error($exception->getMessage());
 
 
-                if ($exception instanceof \ReflectionException) {
-                    return RestApi::error($exception->getMessage());
-                }
-
-                if ($exception instanceof \BadMethodCallException) {
-                    return RestApi::error($exception->getMessage());
-                }
-
-                if ($exception instanceof AuthorizationException) {
-                    return RestApi::error($exception->getMessage());
-                }
-
-                if ($exception instanceof QueryException) {
-                    return RestApi::error($exception->getMessage());
-                }
+//                if ($exception instanceof MethodNotAllowedHttpException) {
+//                    return RestApi::error($exception->getMessage());
+//                }
+//
+//
+//                if ($exception instanceof \ReflectionException) {
+//                    return RestApi::error($exception->getMessage());
+//                }
+//
+//                if ($exception instanceof \BadMethodCallException) {
+//                    return RestApi::error($exception->getMessage());
+//                }
+//
+//                if ($exception instanceof AuthorizationException) {
+//                    return RestApi::error($exception->getMessage());
+//                }
+//
+//                if ($exception instanceof QueryException) {
+//                    return RestApi::error($exception->getMessage());
+//                }
 
 
 

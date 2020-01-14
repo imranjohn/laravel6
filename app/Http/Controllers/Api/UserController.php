@@ -46,8 +46,9 @@ class UserController extends Controller
         $data['password'] = '12345';
 
         $this->user->create($data);
+        $users = $this->user->all();
 
-        return RestApi::success("User created successfully..");
+        return RestApi::successWithData(UserResource::collection($users), "User created successfully..");
     }
 
 

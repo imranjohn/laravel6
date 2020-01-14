@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['prefix' => 'auth', 'middleware' => ['check.headers']], function () {
     Route::post('login', 'Api\AuthController@login');
     Route::post('register', 'Api\AuthController@register');
 
@@ -31,7 +31,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group([], function () {
     Route::resource('users', 'Api\UserController');
 
-    Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['middleware' => ['auth:api', 'verified', 'check.headers']], function () {
         Route::get('dashboard', 'Api\UserController@dashboard');
     });
 });

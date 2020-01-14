@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-       //dd($exception);
+
         if ($request->is('api/*')) {
             try {
                 if ($exception instanceof AuthenticationException) {

@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('verified');
 
 Route::get('phpinfo', function(){
     phpinfo();

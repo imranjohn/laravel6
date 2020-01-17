@@ -7,6 +7,7 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\User\UserRepository;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use App\Classes\RestApi;
 
@@ -46,7 +47,7 @@ class AuthController extends Controller
             'password' => \Hash::make($request->get('password'))
         ]);
 
-
+        event(new Registered($user));
 
         return RestApi::successWithData(new UserResource($user), "User Register successfully.");
     }

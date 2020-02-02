@@ -20,6 +20,7 @@ class AuthController extends Controller
     public function __construct(UserRepository $user)
     {
         $this->user = $user;
+        $this->user = $user;
     }
 
     public function login(UserLoginRequest $request)
